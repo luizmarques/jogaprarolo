@@ -1,0 +1,145 @@
+*{
+  margin:0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.header {
+  background-color: #131921;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header__logo {
+  width: 200px;
+  object-fit: contain;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.header__option {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.header__optionBasket {
+  display: flex;
+  align-items: center;
+}
+
+.header__basketCount {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.header__optionLineOne {
+  font-size: 10px;
+}
+
+.header__optionLineTwo {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.header__nav {
+  display: flex;
+  justify-content: space-evenly;
+  margin-left: 10px;
+}
+
+.header__link {
+  color: white;
+  text-decoration: none;
+}
+
+.header__search{
+  display: flex;
+  flex: 1;
+  
+}
+
+
+.header__searchInput{
+  height: 20px;
+  padding: 20px;
+  border-radius: 2px;
+  border: none;
+  width: 100%;
+}
+
+.header__searchIcon{
+  padding: 3px;
+  height: 40px !important;
+  background-color: #cd6e42;
+}
+
+
+/* home css */
+
+.home {
+  max-width: 1500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.home__img {
+  width: 100%;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+  z-index: -1;
+  margin-bottom: -250px;
+}
+
+.home__row {
+  display: flex;
+  z-index: 1;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/* product css */
+.product {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  max-height: 400px;
+  min-width: 100px;
+  margin: 10px;
+  padding: 20px;
+  width: 100%;
+  background-color: white;
+  z-index: 1;
+}
+
+.product__info{
+  height: 100px;
+  margin-bottom: 15px;
+}
+.product__price{
+  margin-top: 5px;
+}
+.product__rating {
+  display: flex;
+}
+
+.product__star {
+  color: goldenrod;
+}
+
+.product > img{
+  max-height: 150px;
+  width: 100%;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+.product > button {
+  align-self: center;
+  max-width: 100px;
+  background-color: #f0c14b;
+  border: 1px solid;
+  border-color: #daaf42 #ecbf4c #f3c040
+}
