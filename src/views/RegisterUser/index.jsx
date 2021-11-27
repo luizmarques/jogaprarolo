@@ -50,7 +50,8 @@ function Register() {
       agree: yup.boolean().equals([true], "É preciso aceitar os termos."),
     }),
     onSubmit: async (values, { setErrors }) => {
-      const response = await registerUser(values)
+      // const response = 
+      await registerUser(values)
 
       // const { error, response } = await loginUser(values);
       // if (response) {

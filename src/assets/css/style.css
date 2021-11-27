@@ -64,6 +64,7 @@
 
 
 .header__searchInput{
+  /* margin-left: 150px; */
   height: 20px;
   padding: 20px;
   border-radius: 2px;
@@ -72,9 +73,13 @@
 }
 
 .header__searchIcon{
-  padding: 3px;
+  margin-left: 1px;
+  border-radius: 2px;
+  border: none;
+  padding: 10px;
+  width: 35px !important;
   height: 40px !important;
-  background-color: #cd6e42;
+  background-color: #d44f4f;
 }
 
 

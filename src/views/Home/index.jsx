@@ -45,6 +45,26 @@ function Home() {
           img="https://images-na.ssl-images-amazon.com/images/G/32/kindle/devices/2020/Cards/BTF-gateway/Sheldon/FTV_379x304_vermelho._SY304_CB416171296_.jpg"
         />
       </div>
+      <div>
+        <div className="home__row">
+          <Product
+            id="123"
+            title="Algum titulo"
+            price={20.30}
+            rating={4}
+            img="https://looka.com/s/78526505"
+          />
+        </div>
+        <div className="home__row">
+          <Product
+            id="123"
+            title="Algum titulo"
+            price={20.30}
+            rating={4}
+            img="https://looka.com/s/78526505"
+          />
+        </div>
+      </div>
       <div className="home__row">
         <Product
           id="123"

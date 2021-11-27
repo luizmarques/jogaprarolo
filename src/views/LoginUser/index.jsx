@@ -7,10 +7,14 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 import { useFormik } from 'formik'
 import * as yup from "yup";
 import {loginUser} from "../../services/userServices"
+import { saveToken } from '../../config/storage'
+import { updateUser } from "../../store/slices/userSlice"
+import { useDispatch } from "react-redux";
 
 
 function Login() {
   const history = useHistory()
+  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -29,9 +33,19 @@ function Login() {
         .max(50, "Informe no máximo 50 caracteres."),
     }),
     onSubmit: async (values, { setErrors }) => {
-      const response = await loginUser(values)
+      const { response } = await loginUser(values);
+      saveToken(response.data.token)
+
+      if (response) {
+        dispatch(updateUser(response));
+        history.push("/user/dashboard");
+        return;
+      } else {
+        setErrors("Erro ao tentar fazer o login, verique seu e-mail e/ou senha");
+      }
     },
   })
+  
   const getFieldProps = (fieldName) => ({
     ...formik.getFieldProps(fieldName),
     isValid: formik.touched[fieldName] && !formik.errors[fieldName],

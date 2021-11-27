@@ -10,7 +10,7 @@ function Header() {
       <Link to="/">
         <img
           className="header__logo"
-          src="https://psicologanaara.com.br/wp-content/uploads/2020/07/logo-forbes-1-1.png"
+          src="https://i.imgur.com/L4GO5iJ.png"
           alt=""
         />
       </Link>
