@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Layout from './components/layout';
 import AdministratorUser from "./components/users/AdministratorUser";
@@ -11,7 +12,10 @@ import RegisterUser from "./views/RegisterUser";
 function Router() {
   const PrivateRouter = ({ component: Component, ...rest }) => {
     const isLogin = rest.path === "/user/login";
-    // const userRoleRoute = useSelector((state) => state.auth?.type.route);
+    const isGenericUserRoute = rest.path === "/user/dashboard";
+    const isAdmRoute = rest.path === "/user/dashboardAdm";
+    const isPartnerRoute = rest.path === "/user/dashboardPartner";
+    const user = useSelector((state) => state.user.user);
 
     if (!isAuthenticated() && !isLogin) {
       return <Redirect to="/user/login" noThrow />;
@@ -19,6 +23,19 @@ function Router() {
     if (isAuthenticated() && isLogin) {
       return <Redirect to={"/user/dashboard"} noThrow />;
     }
+
+    if (isAdmRoute && !user.isAdministrator) {
+      return <Redirect to={"/user/login"} noThrow />;
+    }
+    if (isGenericUserRoute && !user.isGenericUser) {
+      return <Redirect to={"/user/login"} noThrow />;
+    }
+    if (isPartnerRoute && !user.isPartner) {
+      return <Redirect to={"/user/login"} noThrow />;
+    }
+
+
+
     return <Component {...rest} />;
   };
 

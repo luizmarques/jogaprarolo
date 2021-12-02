@@ -6,9 +6,11 @@ import { PageTitle } from '../../components/PageTitle'
 import { FormField } from '../../components/FormField'
 import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 import {registerUser} from "../../services/userServices"
+import { useHistory } from 'react-router'
 
 
 function Register() {
+  const history = useHistory()
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -52,6 +54,7 @@ function Register() {
     onSubmit: async (values, { setErrors }) => {
       // const response = 
       await registerUser(values)
+      history.push("/user/login")
 
       // const { error, response } = await loginUser(values);
       // if (response) {

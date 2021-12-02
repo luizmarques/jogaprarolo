@@ -5,7 +5,7 @@ import Product from "../../components/Product"
 function Home() {
   return (
     <div className="home">
-      <img className="home__img" src="https://m.media-amazon.com/images/I/61IkiPz43DL._SX3000_.jpg" alt="" />
+      <img className="home__img" src="https://sanifica.com.br/wp-content/uploads/2020/10/Banner_E_commerce-08-08-08.png" alt="" />
       <div className="home__row">
         <Product
           id="123"

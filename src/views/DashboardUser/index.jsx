@@ -8,7 +8,6 @@ import { Container } from 'react-bootstrap'
 function DashboardUser() {
   return (
     <Container>
-      <h1>oioi</h1>
       <PartnerUser/>
       <GenericUser/>
       <AdministratorUser/>

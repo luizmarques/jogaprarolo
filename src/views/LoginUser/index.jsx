@@ -6,7 +6,7 @@ import { FormField } from '../../components/FormField'
 import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 import { useFormik } from 'formik'
 import * as yup from "yup";
-import {loginUser} from "../../services/userServices"
+import { loginUser } from "../../services/userServices"
 import { saveToken } from '../../config/storage'
 import { updateUser } from "../../store/slices/userSlice"
 import { useDispatch } from "react-redux";
@@ -33,19 +33,28 @@ function Login() {
         .max(50, "Informe no máximo 50 caracteres."),
     }),
     onSubmit: async (values, { setErrors }) => {
-      const { response } = await loginUser(values);
+      const response = await loginUser(values);
       saveToken(response.data.token)
 
-      if (response) {
-        dispatch(updateUser(response));
+      if (response.status === 200) {
+        dispatch(updateUser(response.data));
+
+        if (response.data.isAdministrator) {
+          history.push("/user/dashboardadm");
+          return
+        }
+        if (response.data.isPartner) {
+          history.push("/user/dashboardpartner");
+          return
+        }
+        
         history.push("/user/dashboard");
-        return;
       } else {
         setErrors("Erro ao tentar fazer o login, verique seu e-mail e/ou senha");
       }
     },
   })
-  
+
   const getFieldProps = (fieldName) => ({
     ...formik.getFieldProps(fieldName),
     isValid: formik.touched[fieldName] && !formik.errors[fieldName],
@@ -68,8 +77,8 @@ function Login() {
 
             </div>
             <div>
-            <FormField
-              {...getFieldProps("password")}
+              <FormField
+                {...getFieldProps("password")}
                 type="password"
                 label="Senha"
                 placeholder="Informe sua senha de acesso"
@@ -77,10 +86,10 @@ function Login() {
               />
             </div>
             <div>
-            <Button
+              <Button
                 variant="primary"
                 type="submit"
-                loading={formik.isValidating || formik.isSubmitting  || false}
+                loading={formik.isValidating || formik.isSubmitting || false}
                 disabled={!formik.isValid || formik.isSubmitting || false}
               >
                 Login
