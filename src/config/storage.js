@@ -7,8 +7,9 @@ export const getStorageItem = (key) => localStorage.getItem(`${keyStorage + key}
 
 export const removeStorageItem = (key) => localStorage.removeItem(`${keyStorage + key}`);
 
+export const saveUser = (user) => localStorage.setItem(keyStorage, user);
 
-export const saveToken = (token) => localStorage.setItem(keyStorage, token);
+export const getUser = () => localStorage.getItem(keyStorage);
 
 export const getToken = () => localStorage.getItem(keyStorage);
 

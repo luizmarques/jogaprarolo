@@ -7,7 +7,7 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 import { useFormik } from 'formik'
 import * as yup from "yup";
 import { loginUser } from "../../services/userServices"
-import { saveToken } from '../../config/storage'
+import { saveUser } from '../../config/storage'
 import { updateUser } from "../../store/slices/userSlice"
 import { useDispatch } from "react-redux";
 
@@ -34,17 +34,17 @@ function Login() {
     }),
     onSubmit: async (values, { setErrors }) => {
       const response = await loginUser(values);
-      saveToken(response.data.token)
+      saveUser(JSON.stringify(response.data))
 
       if (response.status === 200) {
         dispatch(updateUser(response.data));
 
         if (response.data.isAdministrator) {
-          history.push("/user/dashboardadm");
+          history.push("/user/dashboardAdm");
           return
         }
         if (response.data.isPartner) {
-          history.push("/user/dashboardpartner");
+          history.push("/user/dashboardPartner");
           return
         }
         

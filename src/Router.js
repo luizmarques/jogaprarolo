@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Layout from './components/layout';
-import AdministratorUser from "./components/users/AdministratorUser";
-import PartnerUser from "./components/users/PartnerUser";
 import { isAuthenticated } from "./config/storage";
-import DashboardUser from "./views/DashboardUser";
+import AdministratorUser from "./views/DashboardAdminstrator";
+import DashboardUser from "./views/DashboardGenericUser";
+import PartnerUser from "./views/DashboardPartner";
 import Home from "./views/Home";
 import LoginUser from "./views/LoginUser";
 import RegisterUser from "./views/RegisterUser";
@@ -12,10 +12,8 @@ import RegisterUser from "./views/RegisterUser";
 function Router() {
   const PrivateRouter = ({ component: Component, ...rest }) => {
     const isLogin = rest.path === "/user/login";
-    const isGenericUserRoute = rest.path === "/user/dashboard";
-    const isAdmRoute = rest.path === "/user/dashboardAdm";
-    const isPartnerRoute = rest.path === "/user/dashboardPartner";
     const user = useSelector((state) => state.user.user);
+    console.log(user)
 
     if (!isAuthenticated() && !isLogin) {
       return <Redirect to="/user/login" noThrow />;
@@ -24,17 +22,24 @@ function Router() {
       return <Redirect to={"/user/dashboard"} noThrow />;
     }
 
-    if (isAdmRoute && !user.isAdministrator) {
-      return <Redirect to={"/user/login"} noThrow />;
-    }
-    if (isGenericUserRoute && !user.isGenericUser) {
-      return <Redirect to={"/user/login"} noThrow />;
-    }
-    if (isPartnerRoute && !user.isPartner) {
-      return <Redirect to={"/user/login"} noThrow />;
-    }
+    const isDashboard = rest.path === "/user/dashboard" || rest.path === "/user/dashboardAdm" || rest.path === "/user/dashboardPartner";
+    console.log("@@@@@@@@@@@@@", isDashboard)
 
+    if (isDashboard) {
+      if (user.isAdministrator && rest.path !== "/user/dashboardAdm") {
+        console.log("", "admnistrador")
+        return <Redirect to={"/user/dashboardAdm"} noThrow />;
+      }
+      else if (user.isPartner && rest.path !== "/user/dashboardPartner") {
+        console.log("parceiro")
+        return <Redirect to={"/user/dashboardPartner"} noThrow />;
+      }
+      else if (user.isGenericUser && rest.path !== "/user/dashboard") {
+        console.log("comum")
+        return <Redirect to={"/user/dashboard"} noThrow />;
+      }
 
+    }
 
     return <Component {...rest} />;
   };

@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import http from "../../config/http";
-import { getStorageItem } from "../../config/storage";
+import { getUser } from "../../config/storage";
 
-const user = JSON.parse(getStorageItem("user"));
+const user = JSON.parse(getUser());
 if (user?.token) {
   http.defaults.headers["Authorization"] = `Bearer ${user?.token}`;
 }
