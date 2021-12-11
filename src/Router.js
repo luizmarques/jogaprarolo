@@ -13,7 +13,6 @@ function Router() {
   const PrivateRouter = ({ component: Component, ...rest }) => {
     const isLogin = rest.path === "/user/login";
     const user = useSelector((state) => state.user.user);
-    console.log(user)
 
     if (!isAuthenticated() && !isLogin) {
       return <Redirect to="/user/login" noThrow />;
@@ -23,19 +22,15 @@ function Router() {
     }
 
     const isDashboard = rest.path === "/user/dashboard" || rest.path === "/user/dashboardAdm" || rest.path === "/user/dashboardPartner";
-    console.log("@@@@@@@@@@@@@", isDashboard)
 
     if (isDashboard) {
       if (user.isAdministrator && rest.path !== "/user/dashboardAdm") {
-        console.log("", "admnistrador")
         return <Redirect to={"/user/dashboardAdm"} noThrow />;
       }
       else if (user.isPartner && rest.path !== "/user/dashboardPartner") {
-        console.log("parceiro")
         return <Redirect to={"/user/dashboardPartner"} noThrow />;
       }
       else if (user.isGenericUser && rest.path !== "/user/dashboard") {
-        console.log("comum")
         return <Redirect to={"/user/dashboard"} noThrow />;
       }
 
